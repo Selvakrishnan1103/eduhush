@@ -2,12 +2,12 @@
 
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import ProfileCard from './components/ProfileCard';
-import VideoCard from './components/VideoCard';
+import ProfileCard from './Components/ProfileCard';
+import VideoCard from './Components/VideoCard';
 import Header from '../Components/Section/Header';
 import Footer from '../Components/Section/Footer';
 import { FiVideo, FiEye } from 'react-icons/fi'; 
-import StatsCard from './components/StatsCard';
+import StatsCard from './Components/StatsCard';
 
 export default function DashboardPage() {
   const { data: session } = useSession();
