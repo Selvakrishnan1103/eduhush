@@ -3,7 +3,7 @@ import ForumPost from '@/models/ForumPost';
 
 export async function GET() {
   await connectToMongoDb();
-  const posts = await ForumPost.find().sort({ createdAt: -1 });
+  const posts = await ForumPost.find().sort();
   return new Response(JSON.stringify(posts), { status: 200 });
 }
 
