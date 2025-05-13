@@ -44,7 +44,7 @@ export default function VideoDetails() {
   const handleDislike = async () => {
     await fetch(`/api/videos/${id}/dislike`, { method: 'PATCH' });
     setDisliked(true);
-    setLiked(false); // Optionally, unselect like when dislike is clicked
+    setLiked(false);
     fetchVideo();
   };
 
@@ -90,7 +90,7 @@ export default function VideoDetails() {
         👁️ {video.views || 0} views • Uploaded on {new Date(video.createdAt).toLocaleDateString()}
       </p>
 
-      <div className="w-full h-[250px] bg-black rounded-lg overflow-hidden mb-4">
+      <div className="w-full h-[200px] bg-black rounded-lg overflow-hidden mb-4">
         <video
           src={video.videoUrl}
           controls
@@ -100,33 +100,39 @@ export default function VideoDetails() {
       </div>
 
       <div className="flex items-center gap-4 mb-6 flex-wrap text-xl">
-        <button
-          onClick={handleLike}
-          className={`flex items-center gap-1 transition ${
-            liked ? 'text-[#1b3f5e]' : 'text-[#3C7BAA] hover:text-[#2d5d89]'
-          }`}
-        >
-          <span>{video.likes || 0}</span>
-          <FaThumbsUp />
-          
-        </button>
+        <div className='flex justify-center items-center rounded-full border-2 border-[#3C7BAA] p-1'>
+          <button
+            onClick={handleLike}
+            className={`flex items-center gap-1 transition text-sm ${
+              liked ? 'text-[#1b3f5e]' : 'text-[#3C7BAA] hover:text-[#2d5d89]'
+            }`}
+          >
+            <span>{video.likes || 0}</span>likes
+            <FaThumbsUp />
+            
+          </button>
+        </div>
 
-        <button
-          onClick={handleDislike}
-          className={`flex items-center gap-1 transition ${
-            disliked ? 'text-[#5b0d0d]' : 'text-red-600 hover:text-red-700'
-          }`}
-        >
-          <span>{video.dislikes || 0}</span>
-          <FaThumbsDown />
-        </button>
+        <div className='flex justify-center items-center rounded-full border-2 border-[#5b0d0d] p-1'>
+          <button
+            onClick={handleDislike}
+            className={`flex items-center gap-1 transition text-sm ${
+              disliked ? 'text-[#5b0d0d]' : 'text-red-600 hover:text-red-700'
+            }`}
+          >
+            <span>{video.dislikes || 0}</span>dislikes
+            <FaThumbsDown />
+          </button>
+        </div>
 
-        <button
-          onClick={() => navigator.clipboard.writeText(window.location.href)}
-          className="flex items-center gap-1 text-[#3C7BAA] hover:text-[#2d5d89] transition"
-        >
-          <FaShareAlt /><span>Share</span>
-        </button>
+        <div className='flex justify-center items-center rounded-full border-2 border-[#5b0d0d] p-1'>
+          <button
+            onClick={() => navigator.clipboard.writeText(window.location.href)}
+            className="flex items-center gap-1 text-[#3C7BAA] text-sm hover:text-[#2d5d89] transition"
+          >
+            <FaShareAlt /><span>Share</span>
+          </button>
+        </div>
       </div>
 
       <div className="mb-6">
