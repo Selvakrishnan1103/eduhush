@@ -4,7 +4,7 @@ import Upload from "../Components/Section/upload";
 
 export default function UploadPage() {
   return (
-    <div className="mt-20 mb-20">
+    <div>
       <Header />
       <Upload />
       <Footer />
