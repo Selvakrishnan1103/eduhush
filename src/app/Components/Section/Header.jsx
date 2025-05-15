@@ -5,7 +5,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaSearch } from 'react-icons/fa';
-import { IoClose } from 'react-icons/io5'; 
+import { IoClose } from 'react-icons/io5';
+import { FiSettings } from 'react-icons/fi';
 
 export default function Header() {
   const { data: session, status } = useSession();
@@ -17,19 +18,19 @@ export default function Header() {
     e.preventDefault();
     if (!searchTerm.trim()) return;
     router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
-    setSearchTerm(""); 
-    setIsSearchActive(false); 
+    setSearchTerm("");
+    setIsSearchActive(false);
   };
 
   const handleSearchToggle = () => {
     setIsSearchActive(!isSearchActive);
-    if (isSearchActive) setSearchTerm(""); 
+    if (isSearchActive) setSearchTerm("");
   };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#3C7BAA] shadow-md p-4">
       <div className="flex justify-between items-center">
-        <div className="w-40 h-10 relative">
+        <div className={`${isSearchActive ? 'hidden' : 'flex'} lg:flex w-40 h-10 relative`}>
           <Image
             src="/EduHushTextLogo.png"
             alt="Logo"
@@ -39,7 +40,9 @@ export default function Header() {
           />
         </div>
         <div className="flex items-center w-full justify-between gap-4">
-          <div className="flex items-center ml-auto">
+          <div className="flex items-center ml-auto space-x-4">
+            
+
             {!isSearchActive ? (
               <button onClick={handleSearchToggle} className="p-2">
                 <FaSearch className="w-6 h-6 text-white" />
@@ -58,26 +61,16 @@ export default function Header() {
                 </button>
               </form>
             )}
-          </div>
-          <div className="flex gap-2 items-center">
-            {status === "loading" ? null : session ? (
-              <button
-                onClick={() => signOut()}
-                className="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded"
-              >
-                Logout
-              </button>
-            ) : (
-              <button
-                onClick={() => signIn("google")}
-                className="text-[#3C7BAA] bg-white hover:bg-[#2a5c84] px-4 py-2 rounded"
-              >
-                Login
-              </button>
-            )}
+            <button
+              onClick={() => router.push("/settings")}
+              className="p-2"
+              title="Settings"
+            >
+              <FiSettings className="w-6 h-6 text-white" />
+            </button>
           </div>
         </div>
       </div>
     </header>
-  )
+  );
 }

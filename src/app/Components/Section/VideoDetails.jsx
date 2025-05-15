@@ -90,7 +90,7 @@ export default function VideoDetails() {
         👁️ {video.views || 0} views • Uploaded on {new Date(video.createdAt).toLocaleDateString()}
       </p>
 
-      <div className="w-full h-[200px] bg-black rounded-lg overflow-hidden mb-4">
+      <div className="w-full h-[200px] lg:h-[400px] bg-black rounded-lg overflow-hidden mb-4">
         <video
           src={video.videoUrl}
           controls
